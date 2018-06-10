@@ -9,16 +9,20 @@ import { ProfileTeacherComponent } from './components/profile-teacher/profile-te
 import { ProfileSuperComponent } from './components/profile-super/profile-super.component';
 import { RequestResetComponent } from './components/password/request-reset/request-reset.component';
 import { ResponseResetComponent } from './components/password/response-reset/response-reset.component';
+import { BeforeLoginService } from './Services/before-login.service';
+import { AfterLoginService } from './Services/after-login.service';
 
 const appRoutes: Routes =  [
   {
     path:'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [BeforeLoginService]
   },
 
   {
     path:'signup',
-    component: SignupComponent
+    component: SignupComponent,
+    canActivate: [BeforeLoginService]
   },
 
   {
@@ -38,7 +42,8 @@ const appRoutes: Routes =  [
 
   {
     path:'profile-super',
-    component: ProfileSuperComponent
+    component: ProfileSuperComponent,
+    canActivate: [AfterLoginService]
   },
 
   {
@@ -48,12 +53,14 @@ const appRoutes: Routes =  [
 
   {
     path:'request-password-reset',
-    component: RequestResetComponent
+    component: RequestResetComponent,
+    canActivate: [BeforeLoginService]
   },
 
   {
     path:'response-password-reset',
-    component: ResponseResetComponent
+    component: ResponseResetComponent,
+    canActivate: [BeforeLoginService]
   }
 
 ]
